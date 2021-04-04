@@ -1,15 +1,16 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
+require('dotenv').config()
 
 const config = {
   name: 'medistream',
   connector: 'mysql',
   url: '',
-  host: '<host>',
-  port: 3306,
-  user: 'medistream',
-  password: '<password>',
-  database: 'medistream'
+  host: process.env.DATASOURCE_MEDISTREAM_HOST,
+  port: process.env.DATASOURCE_MEDISTREAM_PORT,
+  user: process.env.DATASOURCE_MEDISTREAM_USER,
+  password: process.env.DATASOURCE_MEDISTREAM_PASSWORD,
+  database: process.env.DATASOURCE_MEDISTREAM_DATABASE
 };
 
 // Observe application's life cycle to disconnect the datasource when
