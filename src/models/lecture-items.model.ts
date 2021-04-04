@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class LectureItems extends Entity {
+export class LECTURE_ITEMS extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -51,7 +51,7 @@ export class LectureItems extends Entity {
   MARK: number;
 
 
-  constructor(data?: Partial<LectureItems>) {
+  constructor(data?: Partial<LECTURE_ITEMS>) {
     super(data);
   }
 }
@@ -60,4 +60,4 @@ export interface LectureItemsRelations {
   // describe navigational properties here
 }
 
-export type LectureItemsWithRelations = LectureItems & LectureItemsRelations;
+export type LectureItemsWithRelations = LECTURE_ITEMS & LectureItemsRelations;

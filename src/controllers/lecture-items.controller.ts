@@ -17,7 +17,7 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {LectureItems} from '../models';
+import {LECTURE_ITEMS} from '../models';
 import {LectureItemsRepository} from '../repositories';
 
 export class LectureItemsController {
@@ -29,21 +29,21 @@ export class LectureItemsController {
   @post('/lecture-items')
   @response(200, {
     description: 'LectureItems model instance',
-    content: {'application/json': {schema: getModelSchemaRef(LectureItems)}},
+    content: {'application/json': {schema: getModelSchemaRef(LECTURE_ITEMS)}},
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(LectureItems, {
+          schema: getModelSchemaRef(LECTURE_ITEMS, {
             title: 'NewLectureItems',
             exclude: ['ID'],
           }),
         },
       },
     })
-    lectureItems: Omit<LectureItems, 'ID'>,
-  ): Promise<LectureItems> {
+    lectureItems: Omit<LECTURE_ITEMS, 'ID'>,
+  ): Promise<LECTURE_ITEMS> {
     return this.lectureItemsRepository.create(lectureItems);
   }
 
@@ -53,7 +53,7 @@ export class LectureItemsController {
     content: {'application/json': {schema: CountSchema}},
   })
   async count(
-    @param.where(LectureItems) where?: Where<LectureItems>,
+    @param.where(LECTURE_ITEMS) where?: Where<LECTURE_ITEMS>,
   ): Promise<Count> {
     return this.lectureItemsRepository.count(where);
   }
@@ -65,14 +65,14 @@ export class LectureItemsController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(LectureItems, {includeRelations: true}),
+          items: getModelSchemaRef(LECTURE_ITEMS, {includeRelations: true}),
         },
       },
     },
   })
   async find(
-    @param.filter(LectureItems) filter?: Filter<LectureItems>,
-  ): Promise<LectureItems[]> {
+    @param.filter(LECTURE_ITEMS) filter?: Filter<LECTURE_ITEMS>,
+  ): Promise<LECTURE_ITEMS[]> {
     return this.lectureItemsRepository.find(filter);
   }
 
@@ -85,12 +85,12 @@ export class LectureItemsController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(LectureItems, {partial: true}),
+          schema: getModelSchemaRef(LECTURE_ITEMS, {partial: true}),
         },
       },
     })
-    lectureItems: LectureItems,
-    @param.where(LectureItems) where?: Where<LectureItems>,
+    lectureItems: LECTURE_ITEMS,
+    @param.where(LECTURE_ITEMS) where?: Where<LECTURE_ITEMS>,
   ): Promise<Count> {
     return this.lectureItemsRepository.updateAll(lectureItems, where);
   }
@@ -100,14 +100,14 @@ export class LectureItemsController {
     description: 'LectureItems model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(LectureItems, {includeRelations: true}),
+        schema: getModelSchemaRef(LECTURE_ITEMS, {includeRelations: true}),
       },
     },
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(LectureItems, {exclude: 'where'}) filter?: FilterExcludingWhere<LectureItems>
-  ): Promise<LectureItems> {
+    @param.filter(LECTURE_ITEMS, {exclude: 'where'}) filter?: FilterExcludingWhere<LECTURE_ITEMS>
+  ): Promise<LECTURE_ITEMS> {
     return this.lectureItemsRepository.findById(id, filter);
   }
 
@@ -120,11 +120,11 @@ export class LectureItemsController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(LectureItems, {partial: true}),
+          schema: getModelSchemaRef(LECTURE_ITEMS, {partial: true}),
         },
       },
     })
-    lectureItems: LectureItems,
+    lectureItems: LECTURE_ITEMS,
   ): Promise<void> {
     await this.lectureItemsRepository.updateById(id, lectureItems);
   }
@@ -135,7 +135,7 @@ export class LectureItemsController {
   })
   async replaceById(
     @param.path.number('id') id: number,
-    @requestBody() lectureItems: LectureItems,
+    @requestBody() lectureItems: LECTURE_ITEMS,
   ): Promise<void> {
     await this.lectureItemsRepository.replaceById(id, lectureItems);
   }
