@@ -18,12 +18,62 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
   @property({
     type: 'string',
   })
-  TITLE?: string;
+  NAME?: string;
 
   @property({
     type: 'string',
   })
-  SUBTITLE?: string;
+  SIGN_URL?: string;
+
+  @property({
+    type: 'string',
+  })
+  START_DATE?: string;
+
+  @property({
+    type: 'string',
+  })
+  END_DATE?: string;
+
+  @property({
+    type: 'string',
+  })
+  CERTIFICATE_DATE?: string;
+
+  @property({
+    type: 'string',
+  })
+  CERTIFICATE_TITLE?: string;
+
+  @property({
+    type: 'string',
+  })
+  CERTIFICATE_SUBTITLE?: string;
+
+  @property({
+    type: 'string',
+  })
+  PROGRAM_TITLE?: string;
+
+  @property({
+    type: 'string',
+  })
+  DESCRIPTION?: string;
+
+  @property({
+    type: 'number',
+  })
+  CREDIT?: string;
+
+  @property({
+    type: 'string',
+  })
+  CREATED_BY?: string;
+
+  @property({
+    type: 'string',
+  })
+  UPDATED_BY?: string;
 
   // Define well-known properties here
 
