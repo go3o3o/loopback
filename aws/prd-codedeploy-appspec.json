@@ -8,7 +8,7 @@
           "TaskDefinition": "arn:aws:ecs:ap-northeast-2:597559577496:task-definition/loopback-prd:1",
           "LoadBalancerInfo": {
             "ContainerName": "medistream-loopback-prd",
-            "ContainerPort": 5001
+            "ContainerPort": 3000
           },
           "PlatformVersion": "1.3.0"
         }
