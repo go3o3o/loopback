@@ -15,15 +15,13 @@
             "essential": true,
             "environment": [],
             "mountPoints": [],
-            "volumesFrom": [],
-            "logConfiguration": {}
+            "volumesFrom": []
         }
     ],
     "family": "loopback-prd",
     "taskRoleArn": "arn:aws:iam::597559577496:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::597559577496:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "volumes": [],
     "placementConstraints": [],
     "requiresCompatibilities": [
         "FARGATE"
