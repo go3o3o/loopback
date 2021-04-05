@@ -11,33 +11,26 @@ pipelines:
             - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ECR_REPOSITORY
             - IMAGE=$AWS_ECR_REPOSITORY/$AWS_ECR_REPOSITORY_NAME
             - TAG=$BITBUCKET_TAG
-            - docker build -t $IMAGE:$TAG . 
-              --build-arg nodeEnv=$NODE_ENV 
-              --build-arg elasticsearchUrl=$ELASTICSEARCH_URL 
-              --build-arg dbUrl=$DB_URL
-              --build-arg dbName=$DB_NAME
-              --build-arg searchApiUrl=$SEARCH_API_URL
-              --build-arg dataWarehouseHost=$DATAWAREHOUSE_HOST  
-              --build-arg dataWarehouseUser=$DATAWAREHOUSE_USER 
-              --build-arg dataWarehousePassword=$DATAWAREHOUSE_PASSWORD
-              --build-arg dataWarehouseDatabase=$DATAWAREHOUSE_DATABASE
-              --build-arg fasstoAPI=$FASSTO_API
-              --build-arg fasstoAPICd=$FASSTO_API_CD
-              --build-arg fasstoAPIKey=$FASSTO_API_KEY
-              --build-arg fasstoAPICstCd=$FASSTO_API_CST_CD
+            - docker build -t $IMAGE:$TAG .
+              --build-arg DATASOURCE_COMMUNITY_HOST=$DATASOURCE_COMMUNITY_HOST
+              --build-arg DATASOURCE_COMMUNITY_PORT=$DATASOURCE_COMMUNITY_PORT
+              --build-arg DATASOURCE_COMMUNITY_USER=$DATASOURCE_COMMUNITY_USER
+              --build-arg DATASOURCE_COMMUNITY_PASSWORD=$DATASOURCE_COMMUNITY_PASSWORD
+              --build-arg DATASOURCE_COMMUNITY_DATABASE=$DATASOURCE_COMMUNITY_DATABASE
+              --build-arg DATASOURCE_CEZERIN_URL=$DATASOURCE_CEZERIN_URL
             - docker push $IMAGE:$TAG
             - MANIFEST=$(aws ecr batch-get-image --region $AWS_REGION --repository-name $AWS_ECR_REPOSITORY_NAME --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
-            - aws ecr put-image 
-              --region $AWS_REGION 
-              --repository-name $AWS_ECR_REPOSITORY_NAME 
-              --image-tag production 
+            - aws ecr put-image
+              --region $AWS_REGION
+              --repository-name $AWS_ECR_REPOSITORY_NAME
+              --image-tag production
               --image-manifest "$MANIFEST"
-            - aws ecs deploy 
-              --region $AWS_REGION 
+            - aws ecs deploy
+              --region $AWS_REGION
               --task-definition ./aws/prd-ecs-task-definition.json
               --cluster $AWS_ECS_CLUSTER
               --service $AWS_ECS_SERVICE
-              --codedeploy-appspec ./aws/prd-codedeploy-appspec.json 
+              --codedeploy-appspec ./aws/prd-codedeploy-appspec.json
               --codedeploy-deployment-group $AWS_CODEDEPLOY_APPLICATION_GROUP
     staging-*:
       - step:
@@ -50,25 +43,18 @@ pipelines:
             - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ECR_REPOSITORY
             - IMAGE=$AWS_ECR_REPOSITORY/$AWS_ECR_REPOSITORY_NAME
             - TAG=$BITBUCKET_TAG
-            - docker build -t $IMAGE:$TAG . 
-              --build-arg nodeEnv=$NODE_ENV 
-              --build-arg elasticsearchUrl=$ELASTICSEARCH_URL 
-              --build-arg dbUrl=$DB_URL
-              --build-arg dbName=$DB_NAME
-              --build-arg searchApiUrl=$SEARCH_API_URL
-              --build-arg dataWarehouseHost=$DATAWAREHOUSE_HOST  
-              --build-arg dataWarehouseUser=$DATAWAREHOUSE_USER 
-              --build-arg dataWarehousePassword=$DATAWAREHOUSE_PASSWORD
-              --build-arg dataWarehouseDatabase=$DATAWAREHOUSE_DATABASE
-              --build-arg fasstoAPI=$FASSTO_API
-              --build-arg fasstoAPICd=$FASSTO_API_CD
-              --build-arg fasstoAPIKey=$FASSTO_API_KEY
-              --build-arg fasstoAPICstCd=$FASSTO_API_CST_CD
+            - docker build -t $IMAGE:$TAG .
+              --build-arg DATASOURCE_COMMUNITY_HOST=$DATASOURCE_COMMUNITY_HOST
+              --build-arg DATASOURCE_COMMUNITY_PORT=$DATASOURCE_COMMUNITY_PORT
+              --build-arg DATASOURCE_COMMUNITY_USER=$DATASOURCE_COMMUNITY_USER
+              --build-arg DATASOURCE_COMMUNITY_PASSWORD=$DATASOURCE_COMMUNITY_PASSWORD
+              --build-arg DATASOURCE_COMMUNITY_DATABASE=$DATASOURCE_COMMUNITY_DATABASE
+              --build-arg DATASOURCE_CEZERIN_URL=$DATASOURCE_CEZERIN_URL
             - docker push $IMAGE:$TAG
             - MANIFEST=$(aws ecr batch-get-image --region $AWS_REGION --repository-name $AWS_ECR_REPOSITORY_NAME --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
-            - aws ecr put-image 
-              --region $AWS_REGION 
-              --repository-name $AWS_ECR_REPOSITORY_NAME 
-              --image-tag staging 
+            - aws ecr put-image
+              --region $AWS_REGION
+              --repository-name $AWS_ECR_REPOSITORY_NAME
+              --image-tag staging
               --image-manifest "$MANIFEST"
             - aws ecs update-service --region $AWS_REGION --cluster $AWS_ECS_CLUSTER --service $AWS_ECS_SERVICE --platform-version 1.3.0 --force-new-deployment

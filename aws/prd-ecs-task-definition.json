@@ -1,0 +1,64 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "medistream-loopback-prd",
+            "image": "597559577496.dkr.ecr.ap-northeast-2.amazonaws.com/medistream-loopback:production",
+            "cpu": 0,
+            "memoryReservation": 400,
+            "portMappings": [
+                {
+                    "containerPort": 5001,
+                    "hostPort": 5001,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [
+                {
+                    "containerPath": "/opt/logs",
+                    "sourceVolume": "loopback-logs"
+                }
+            ],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/loopback-prd",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        },
+        {
+            "name": "filebeat",
+            "image": "597559577496.dkr.ecr.ap-northeast-2.amazonaws.com/filebeat:latest",
+            "cpu": 0,
+            "memoryReservation": 20,
+            "portMappings": [],
+            "mountPoints": [
+                {
+                    "readOnly": true,
+                    "containerPath": "/var/logs/loopback",
+                    "sourceVolume": "loopback-logs"
+                }
+            ],
+            "volumesFrom": []
+        }
+    ],
+    "family": "loopback-prd",
+    "taskRoleArn": "arn:aws:iam::597559577496:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::597559577496:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [
+        {
+            "name": "loopback-logs"
+        }
+    ],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
+}
