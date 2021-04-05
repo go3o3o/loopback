@@ -1,10 +1,10 @@
 import {ModelCrudRestApiConfig} from '@loopback/rest-crud';
-import {LECTURE_ITEMS} from '../models';
+import {LECTURE_CERTIFICATE_INFO} from '../models';
 
 const config: ModelCrudRestApiConfig = {
-  model: LECTURE_ITEMS,
+  model: LECTURE_CERTIFICATE_INFO,
   pattern: 'CrudRest',
   dataSource: 'COMMUNITY',
-  basePath: '/lecture-items',
+  basePath: '/lecture-certificate-infos',
 };
 module.exports = config;

@@ -3,14 +3,15 @@ import {juggler} from '@loopback/repository';
 require('dotenv').config()
 
 const config = {
-  name: 'medistream',
-  connector: 'mysql',
-  url: '',
-  host: process.env.DATASOURCE_MEDISTREAM_HOST,
-  port: process.env.DATASOURCE_MEDISTREAM_PORT,
-  user: process.env.DATASOURCE_MEDISTREAM_USER,
-  password: process.env.DATASOURCE_MEDISTREAM_PASSWORD,
-  database: process.env.DATASOURCE_MEDISTREAM_DATABASE
+  name: 'CEZERIN',
+  connector: 'mongodb',
+  url: process.env.DATASOURCE_CEZERIN_URL,
+  host: '',
+  port: 0,
+  user: '',
+  password: '',
+  database: '',
+  useNewUrlParser: true
 };
 
 // Observe application's life cycle to disconnect the datasource when
@@ -18,13 +19,13 @@ const config = {
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
 @lifeCycleObserver('datasource')
-export class MedistreamDataSource extends juggler.DataSource
+export class CezerinDataSource extends juggler.DataSource
   implements LifeCycleObserver {
-  static dataSourceName = 'medistream';
+  static dataSourceName = 'CEZERIN';
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.medistream', {optional: true})
+    @inject('datasources.config.CEZERIN', {optional: true})
     dsConfig: object = config,
   ) {
     super(dsConfig);

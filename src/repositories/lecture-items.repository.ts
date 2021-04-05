@@ -1,7 +1,7 @@
 import {inject} from '@loopback/core';
 import {DefaultCrudRepository} from '@loopback/repository';
-import {MedistreamDataSource} from '../datasources';
-import {LECTURE_ITEMS, LectureItemsRelations} from '../models';
+import {CommunityDataSource} from '../datasources';
+import {LectureItemsRelations, LECTURE_ITEMS} from '../models';
 
 export class LectureItemsRepository extends DefaultCrudRepository<
   LECTURE_ITEMS,
@@ -9,7 +9,7 @@ export class LectureItemsRepository extends DefaultCrudRepository<
   LectureItemsRelations
 > {
   constructor(
-    @inject('datasources.medistream') dataSource: MedistreamDataSource,
+    @inject('datasources.COMMUNITY') dataSource: CommunityDataSource,
   ) {
     super(LECTURE_ITEMS, dataSource);
   }
