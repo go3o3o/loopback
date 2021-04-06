@@ -1,9 +1,27 @@
 import {ApplicationConfig, MedistreamLoopbackApplication} from './application';
+import {Interceptor, InvocationContext} from '@loopback/core';
+import {RestBindings} from '@loopback/rest';
 
 export * from './application';
 
+const SimpleHeaderAuthInterceptor: Interceptor = async (ctx, next) => {
+  const reqCtx : any = await ctx.get(RestBindings.Http.CONTEXT);
+  if(reqCtx.headers.indexOf('Authorization') != -1) {
+    return;
+  } else {
+    if(reqCtx.headers['Authorization'] != '9e9d41f893e621c23fe5e58acdea310ed8e055c16ea5a6ff806908ac7ae834ba') {
+      return;
+    }
+  }
+};
+
 export async function main(options: ApplicationConfig = {}) {
   const app = new MedistreamLoopbackApplication(options);
+
+  app.interceptor(SimpleHeaderAuthInterceptor, {
+    global: true
+  });
+
   await app.boot();
   await app.start();
 
