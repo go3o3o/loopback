@@ -11,7 +11,6 @@ export class LECTURE_ITEMS extends Entity {
 
   @property({
     type: 'number',
-    required: true,
   })
   ARTICLE_ID: number;
 
@@ -34,21 +33,23 @@ export class LECTURE_ITEMS extends Entity {
 
   @property({
     type: 'number',
-    required: true,
   })
   COURSE_ID: number;
 
   @property({
     type: 'number',
-    required: true,
   })
   CONTROLLED: number;
 
   @property({
     type: 'number',
-    required: true,
   })
   MARK: number;
+
+  @property({
+    type: 'string',
+  })
+  REQUIREMENT: string;
 
 
   constructor(data?: Partial<LECTURE_ITEMS>) {

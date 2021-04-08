@@ -22,9 +22,9 @@ const SimpleHeaderAuthInterceptor: Interceptor = async (ctx, next) => {
 export async function main(options: ApplicationConfig = {}) {
   const app = new MedistreamLoopbackApplication(options);
 
-  app.interceptor(SimpleHeaderAuthInterceptor, {
-    global: true
-  });
+  // app.interceptor(SimpleHeaderAuthInterceptor, {
+    // global: true
+  // });
 
   await app.boot();
   await app.start();
