@@ -1,5 +1,4 @@
 import {Entity, model, property} from '@loopback/repository';
-
 @model({settings: {strict: false}})
 export class LECTURE_CERTIFICATE_INFO extends Entity {
   @property({
@@ -34,6 +33,11 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
     type: 'string',
   })
   END_DATE?: string;
+
+  @property({
+    type: 'string',
+  })
+  CERTIFICATE_DATE?: string;
 
   @property({
     type: 'string',
