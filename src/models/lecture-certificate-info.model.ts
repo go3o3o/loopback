@@ -10,10 +10,10 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
   ID?: number;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  ARTICLE_ID: number;
+  SKU: string;
 
   @property({
     type: 'string',
@@ -34,11 +34,6 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
     type: 'string',
   })
   END_DATE?: string;
-
-  @property({
-    type: 'string',
-  })
-  CERTIFICATE_DATE?: string;
 
   @property({
     type: 'string',
