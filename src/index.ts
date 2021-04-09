@@ -10,7 +10,7 @@ const SimpleHeaderAuthInterceptor: Interceptor = async (ctx, next) => {
   if(!reqCtx.headers['authorization']) {
     return;
   } else {
-    if (reqCtx.headers['authorization'] !== '9e9d41f893e621c23fe5e58acdea310ed8e055c16ea5a6ff806908ac7ae834ba') {
+    if (reqCtx.headers['authorization'] !== process.env.AUTHORIZATION_KEY) {
       return;
     } else {
       const result = await next();
@@ -22,9 +22,9 @@ const SimpleHeaderAuthInterceptor: Interceptor = async (ctx, next) => {
 export async function main(options: ApplicationConfig = {}) {
   const app = new MedistreamLoopbackApplication(options);
 
-  app.interceptor(SimpleHeaderAuthInterceptor, {
-    global: true
-  });
+ app.interceptor(SimpleHeaderAuthInterceptor, {
+   global: true
+ });
 
   await app.boot();
   await app.start();
