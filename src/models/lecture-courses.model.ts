@@ -1,6 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
+
 @model({settings: {strict: false}})
-export class LECTURE_CERTIFICATE_INFO extends Entity {
+export class LECTURE_COURSES extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -12,17 +13,17 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
     type: 'string',
     required: true,
   })
-  SKU: string;
+  SKU_CODE: string;
 
   @property({
     type: 'string',
   })
-  NAME?: string;
+  INSTITUTION_NAME?: string;
 
   @property({
     type: 'string',
   })
-  SIGN_URL?: string;
+  SIGN_IMAGE_URL?: string;
 
   @property({
     type: 'string',
@@ -52,27 +53,17 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
   @property({
     type: 'string',
   })
-  PROGRAM_TITLE?: string;
+  COURSE_TITLE?: string;
 
   @property({
     type: 'string',
   })
-  DESCRIPTION?: string;
+  COURSE_DESCRIPTION?: string;
 
   @property({
     type: 'number',
   })
   CREDIT?: string;
-
-  @property({
-    type: 'string',
-  })
-  CREATED_BY?: string;
-
-  @property({
-    type: 'string',
-  })
-  UPDATED_BY?: string;
 
   // Define well-known properties here
 
@@ -80,13 +71,13 @@ export class LECTURE_CERTIFICATE_INFO extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<LECTURE_CERTIFICATE_INFO>) {
+  constructor(data?: Partial<LECTURE_COURSES>) {
     super(data);
   }
 }
 
-export interface LectureCertificateInfoRelations {
+export interface LectureCoursesRelations {
   // describe navigational properties here
 }
 
-export type LectureCertificateInfoWithRelations = LECTURE_CERTIFICATE_INFO & LectureCertificateInfoRelations;
+export type LectureCoursesWithRelations = LECTURE_COURSES & LectureCoursesRelations;

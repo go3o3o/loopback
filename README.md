@@ -3,6 +3,18 @@
 This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
 [initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
 
+## Previous task
+
+`npm install -g @loopback/cli`: Install LoopBack 4 CLI
+
+`lb4 datasource`: Setting datasource info
+
+`lb4 model`: Setting model info
+
+`lb4 repository`: Setting repository info
+
+`lb4 rest-crud`: Setting rest api for CRUD
+
 ## Install dependencies
 
 By default, dependencies were installed when this application was generated.

@@ -15,6 +15,11 @@ export class LECTURE_ITEMS extends Entity {
   ARTICLE_ID: number;
 
   @property({
+    type: 'number',
+  })
+  LECTURE_COURSES_ID: number;
+
+  @property({
     type: 'string',
     required: true,
   })
